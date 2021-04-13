@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>702910810493-ahgq53k14mq86trh06sq9oin54q69gh2.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.702910810493-ahgq53k14mq86trh06sq9oin54q69gh2</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCtPQlvHSK6qt6D_bk0zUEDP-SrwZM8iV0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>702910810493</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>io.solid.ecogro</string>
+	<key>PROJECT_ID</key>
+	<string>solid-a831f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>solid-a831f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:702910810493:ios:cfa149c2a7d5276bba2414</string>
+</dict>
+</plist>

@@ -1,6 +1,6 @@
-# ecogro
+# ECOGRO
 
-A new Flutter project.
+Discover your food wastage habits by scanning your grocery receipts using image processing and machine learning.
 
 ## Getting Started
 

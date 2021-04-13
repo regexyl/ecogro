@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "702910810493",
+    "project_id": "solid-a831f",
+    "storage_bucket": "solid-a831f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:702910810493:android:0a7a55827f6eba27ba2414",
+        "android_client_info": {
+          "package_name": "io.solid.ecogro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "702910810493-qu45pqafv6dti70h380djjq3tfjhsu5a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAm2MXx65y8yUbGdmvibPoyGIlq7x31Dkg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "702910810493-qu45pqafv6dti70h380djjq3tfjhsu5a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "702910810493-13btgebrrpf9301kovn3jsku07gtl0v9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.solid.solid"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

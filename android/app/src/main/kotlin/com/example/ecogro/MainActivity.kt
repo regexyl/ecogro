@@ -1,4 +1,4 @@
-package com.example.ecogro
+package io.solid.ecogro
 
 import io.flutter.embedding.android.FlutterActivity
 
