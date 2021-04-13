@@ -7,12 +7,12 @@ import 'package:ecogro/widgets/home_page_one.dart';
 import 'package:ecogro/widgets/home_page_three.dart';
 import 'package:ecogro/widgets/home_page_two.dart';
 
-class RequestServiceFlow extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
-  _RequestServiceFlowState createState() => _RequestServiceFlowState();
+  _HomeState createState() => _HomeState();
 }
 
-class _RequestServiceFlowState extends State<RequestServiceFlow> {
+class _HomeState extends State<Home> {
   int current = 0;
 
   void nextPage() {
@@ -56,6 +56,35 @@ class _RequestServiceFlowState extends State<RequestServiceFlow> {
       body: AnimatedSwitcher(
         duration: Duration(milliseconds: 300),
         child: pages[current],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+        items: [
+          BottomNavigationBarItem(
+           icon: new Icon(Icons.home),
+           label: 'Home',
+         ),
+         BottomNavigationBarItem(
+           icon: new Icon(Icons.list_alt),
+           label: 'Record',
+         ),
+         BottomNavigationBarItem(
+           icon: new Icon(Icons.add_circle),
+           label: 'Add'
+         ),
+         BottomNavigationBarItem(
+           icon: new Icon(Icons.card_giftcard),
+           label: 'Rewards'
+         ),
+         BottomNavigationBarItem(
+           icon: new Icon(Icons.person),
+           label: 'Profile'
+         ),
+        ],
+        selectedItemColor: Constants.primaryColor,
+        unselectedItemColor: Colors.grey[400],
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
       ),
     );
   }

@@ -5,8 +5,9 @@ class InputWidget extends StatelessWidget {
   final String hintText;
   final IconData suffixIcon;
   final bool obscureText;
+  final TextEditingController controller;
 
-  InputWidget({this.suffixIcon, this.hintText, this.obscureText = false});
+  InputWidget({this.suffixIcon, this.hintText, this.obscureText= false, this.controller});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,6 +23,7 @@ class InputWidget extends StatelessWidget {
       ),
       child: TextFormField(
         obscureText: this.obscureText,
+        controller: this.controller,
         decoration: InputDecoration(
           suffixIcon: this.suffixIcon == null
               ? null
