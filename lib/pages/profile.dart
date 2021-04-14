@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ecogro/utils/authentication.dart';
+import 'package:ecogro/utils/constants.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -12,7 +15,20 @@ class _ProfileState extends State<Profile> {
       appBar: AppBar(
         title: Text('Profile'),
       ),
-      body: Text('Profile Screen', style: TextStyle(fontSize: 40)),
+      body: Center(
+        child: Column(
+          children: [
+            Text('Profile Screen', style: TextStyle(fontSize: 40)),
+            ElevatedButton(
+              onPressed: () {
+                context.read<AuthenticationService>().signOut();
+              },
+              child: Text('Sign out'),
+              style: ElevatedButton.styleFrom(primary: Constants.primaryColor),
+            )
+          ],
+        )
+      )
     );
   }
 }

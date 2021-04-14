@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:ecogro/registration.dart';
+import 'package:ecogro/utils/constants.dart';
 import 'package:ecogro/widgets/login_form.dart';
 
 class Login extends StatelessWidget {
@@ -52,9 +54,30 @@ class Login extends StatelessWidget {
                         height: 20.0,
                       ),
                       LoginForm(),
-                    ],
+                      Center(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 22.0),
+                          child: TextButton(
+                            child: Text(
+                              'Create an account.',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w600,
+                                color: Constants.primaryColor
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context, 
+                                MaterialPageRoute(
+                                  builder: (context) => Registration())
+                                );
+                            }
+                          ),
+                        ),
+                      )
+                    ]),
                   ),
-                ),
               ),
             ],
           ),
