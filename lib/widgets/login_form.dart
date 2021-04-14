@@ -1,7 +1,7 @@
 import 'package:ecogro/utils/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:ecogro/pages/home.dart';
+import 'package:ecogro/navbar.dart';
 import 'package:ecogro/utils/helper.dart';
 import 'package:provider/provider.dart';
 import 'package:ecogro/widgets/input_widget.dart';

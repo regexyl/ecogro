@@ -5,9 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ecogro/utils/constants.dart';
-import 'package:ecogro/pages/login.dart';
+import 'package:ecogro/login.dart';
+import 'package:ecogro/navbar.dart';
 import 'package:ecogro/utils/authentication.dart';
-import 'package:ecogro/pages/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,7 +57,7 @@ Route<dynamic> _onGenerateRoute(RouteSettings settings) {
       });
     case "/repair-flow":
       return MaterialPageRoute(builder: (BuildContext context) {
-        return Home();
+        return NavBar();
       });
     default:
       return MaterialPageRoute(builder: (BuildContext context) {
@@ -71,7 +71,7 @@ class AuthenticationWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>(); // listen for user
     if (firebaseUser != null) {
-      return Home();
+      return NavBar();
     }
     return Login();
   }
