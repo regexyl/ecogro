@@ -1,9 +1,7 @@
-import 'package:ecogro/utils/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:ecogro/navbar.dart';
-import 'package:ecogro/utils/helper.dart';
 import 'package:provider/provider.dart';
+import 'package:ecogro/utils/authentication.dart';
 import 'package:ecogro/widgets/input_widget.dart';
 import 'package:ecogro/widgets/primary_button.dart';
 
@@ -35,7 +33,6 @@ class LoginForm extends StatelessWidget {
           PrimaryButton(
             text: "Login",
             onPressed: () {
-              // Helper.nextPage(context, Home()); // original template directs user to homepage
               context.read<AuthenticationService>().signIn(
                 email: emailController.text.trim(),
                 password: passwordController.text.trim(),

@@ -45,7 +45,8 @@ class MyApp extends StatelessWidget {
                 // initialRoute: "/",
                 // onGenerateRoute: _onGenerateRoute,
               ),
-            ));
+            )
+          );
   }
 }
 
