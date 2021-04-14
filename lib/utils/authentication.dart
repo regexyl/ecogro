@@ -11,6 +11,11 @@ class AuthenticationService {
   // Listens in the widget tree; if user is signed in, homepage is returned. Otherwise, the login page is displayed.
   Stream<User> get authStateChanges => _firebaseAuth.idTokenChanges();
 
+  // Get UID
+  Future<String> getCurrentUID() async {
+    return (await _firebaseAuth.currentUser).uid;
+  }
+
   /// This won't pop routes so you could do something like
   /// Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
   /// after you called this method if you want to pop all routes.
@@ -36,7 +41,7 @@ class AuthenticationService {
       await FirebaseFirestore.instance
           .collection('users')
           .doc(user.uid)
-          .set({'name': name, 'email': email});
+          .set({'name': name, 'email': email, 'uid': user.uid});
       return "Signed up with email: $email";
     } on FirebaseAuthException catch (e) {
       return e.message;
