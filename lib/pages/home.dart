@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecogro/utils/authentication.dart';
 import 'package:ecogro/widgets/tab_menu.dart';
+import 'package:ecogro/widgets/item_card.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -15,12 +16,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  // Save user ID to state
   @override
   void initState() {
     super.initState();
      _getCurrentUID(context);
   }
 
+  // Get current user ID
   String _uid;
   Future<String> _getCurrentUID(BuildContext context) async {
     final uid = await context.read<AuthenticationService>().getCurrentUID();
@@ -77,11 +81,15 @@ class _HomeState extends State<Home> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        TabMenu(['Urgent', 'Standby', 'Forgotten'])
+                        TabMenu(['Urgent', 'These can wait', 'Forgotten'])
                       ],
                     ),
                     Container(
-                      height: 20.0,
+                      height: 8.0,
+                    ),
+                    ItemCard(),
+                    Container(
+                      height: 30.0,
                     ),
                     Row(
                       children: [
