@@ -66,8 +66,11 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                     Container(
-                      height: 50.0,
-                      child: TabMenu('Urgent', 'Standby', 'Forgotten'), // only 3 parameters allowed
+                      height: 8.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [TabMenu(['Urgent', 'Standby', 'Forgotten'])],
                     ),
                     
                     Container(
@@ -81,6 +84,13 @@ class _HomeState extends State<Home> {
                               fontSize: 22, fontWeight: FontWeight.w800),
                         )
                       ],
+                    ),
+                    Container(
+                      height: 8.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [TabMenu(['Wellcome', "PARKnSHOP", 'Marketplace'])],
                     ),
                   ])));
         }
