@@ -15,18 +15,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    super.initState();
+     _getCurrentUID(context);
+  }
+
   String _uid;
-  Future<String> _getCurrentUID() async {
+  Future<String> _getCurrentUID(BuildContext context) async {
     final uid = await context.read<AuthenticationService>().getCurrentUID();
     setState(() {
       _uid = uid;
     });
+    return uid;
   }
 
   @override
   Widget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
-
     return FutureBuilder<DocumentSnapshot>(
       future: users.doc(_uid).get(),
       builder:
@@ -70,9 +76,10 @@ class _HomeState extends State<Home> {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: [TabMenu(['Urgent', 'Standby', 'Forgotten'])],
+                      children: [
+                        TabMenu(['Urgent', 'Standby', 'Forgotten'])
+                      ],
                     ),
-                    
                     Container(
                       height: 20.0,
                     ),
@@ -90,7 +97,9 @@ class _HomeState extends State<Home> {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: [TabMenu(['Wellcome', "PARKnSHOP", 'Marketplace'])],
+                      children: [
+                        TabMenu(['Wellcome', "PARKnSHOP", 'Marketplace'])
+                      ],
                     ),
                   ])));
         }
