@@ -1,10 +1,24 @@
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecogro/utils/authentication.dart';
 import 'package:ecogro/utils/constants.dart';
+
+class FoodImage {
+  final int foodImageURL;
+
+  FoodImage({@required this.foodImageURL});
+
+  factory FoodImage.fromJson(Map<String, dynamic> json) {
+    return FoodImage(
+      foodImageURL: json['items'][0]['pngurl'][0], // get first image from response
+    );
+  }
+}
 
 class ItemCard extends StatefulWidget {
   @override
@@ -32,6 +46,21 @@ class _ItemCardState extends State<ItemCard> {
     });
     return uid;
   }
+
+  Future<FoodImage> fetchFoodImage(item) async {
+  final response =
+      await http.get(Uri.https('freesvgclipart.com/wp-json/clipart/api?query=', '$item'));
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return FoodImage.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load FoodImage');
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +139,7 @@ class _ItemCardState extends State<ItemCard> {
                         Positioned( // Item image
                           right: 24,
                           bottom: 30,
-                          child: Text('item image'),
+                          child: Image.network(fetchFoodImage('$cards[index]["item"]').toString())
                         ),
                       ],
                     ),
