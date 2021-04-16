@@ -2,6 +2,8 @@
 
 Discover your food wastage habits by scanning your grocery receipts using image processing and tracking your food quantity at home.
 
+After saving records of their food items in the app, users can mark each item as 'FINISHED' once consumed. It will then be classified as 'WASTED' if not marked by the expiry date. This helps the user to be more aware of the food items bought, and reduces the potential of high food wastage.
+
 ## App Overview
 ### 1. User creates an account
 Before logging into the account, the user needs to set it up beforehand. Once the registration is successful, the user then logs in and is redirected to the home screen.
@@ -17,6 +19,7 @@ The home page consists of 2 main sections:
 1. In Your Pantry 
 2. Good Deals to Check Out
 ### In Your Pantry
+Users can sort their food inventory by the urgency of consumption. For example, if the food is expiring in 3 days, it will be placed in the 'Urgent' category. A notification (a to-be implemented feature) is also sent out once a food falls into this category. This ensures that the user consumes the food in time.
 ### Good Deals to Check Out
 Advertisements from local supermarkets can be displayed here, and this gives a 3-way benefit. First, discount-hunting customers have the ease of viewing discount ads. Secondly, supermarkets can reach out to customers directly for advertising. Thirdly, we as the business/app owner will be able to earn revenue from the ads.
 <p align="center">
