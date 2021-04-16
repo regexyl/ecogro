@@ -14,6 +14,7 @@ class LoadScreen extends StatelessWidget {
               'assets/images/ecogro_logo_white.png',
               width: 200,
             ),
+            
           ],
         ),
       ),

@@ -55,22 +55,19 @@ class _NavBarState extends State<NavBar> {
           bucket: bucket,
         ),
         floatingActionButton: Container(
-          width: 70,
-          height: 70,
+          // width: 70,
+          // height: 70,
           child: (
-            // FloatingActionButton(
-            //   child: Icon(Icons.add, size: 30.0,),
-            //   backgroundColor: Constants.primaryColor,
-            //   onPressed: () {},
-            // )
             PopupMenuButton<String>(
+              elevation: 30,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10.0))),
             offset: const Offset(-45, -200),
             icon: Icon(
               Icons.add_circle_rounded,
+              color: Constants.primaryColor,
             ),
-            iconSize: 60,
+            iconSize: 80,
             itemBuilder: (BuildContext context) => _popUpMenuItems,
             onSelected: (String newValue) {
               if (newValue == 'Add Manually') {
@@ -87,7 +84,7 @@ class _NavBarState extends State<NavBar> {
             })),
           ),
         
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomAppBar(
           shape: CircularNotchedRectangle(),
           notchMargin: 10,

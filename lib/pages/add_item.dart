@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ecogro/utils/constants.dart';
+import 'package:ecogro/utils/authentication.dart';
 
 class AddItemScreen extends StatefulWidget {
   @override
@@ -13,18 +14,32 @@ class AddItemScreen extends StatefulWidget {
 
 class _AddItemScreenState extends State<AddItemScreen> {
   String selectedOption = '';
-
-  //final databaseRef = Firestore.instance();
-
   final pDateFormat = new DateFormat('yyyy/MM/dd');
 
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentUID(context);
+  }
+
+  String _uid;
+  Future<String> _getCurrentUID(BuildContext context) async {
+    final uid = await context.read<AuthenticationService>().getCurrentUID();
+    setState(() {
+      _uid = uid;
+    });
+    return uid;
+  }
+
   //Item input
-  String storeName;
+  String uid;
+  String store;
   DateTime purchaseDate = DateTime.now();
   int exDay = 3;
   DateTime expiryDate = DateTime.now().add(Duration(days: 3));
-  String itemName;
-  String itemType;
+  String item;
+  String name;
+  int quantity;
 
   List<String> itemList = [];
 
@@ -43,28 +58,23 @@ class _AddItemScreenState extends State<AddItemScreen> {
           PopupMenuItem<String>(value: value, child: Text(value)))
       .toList();
 
-  void addDataToFirestore() async {
-    // await databaseRef.collection('items').document().setData({
-    //   'store': storeName,
-    //   'purchaseDate': purchaseDate,
-    //   'status': 'UNFINISHED',
-    //   'name': itemName,
-    //   'item': itemName,
-    //   'type': itemType,
-    // });
-  }
+  CollectionReference items = FirebaseFirestore.instance.collection('items');
 
-  void addNewItem() {
-    setState(() {
-      itemName = null;
-      itemType = null;
+  Future<void> addItem() {
+    return items.add({
+      'uid': _uid,
+      'name': name,
+      'item': item,
+      'quantity': quantity,
+      'purchaseDate': purchaseDate,
+      'expiryDate': expiryDate,
+      'store': store,
     });
   }
 
   @override
   Widget build(BuildContext context) {
     selectedOption = ModalRoute.of(context).settings.arguments.toString();
-    //final firebaseUser = context.watch<User>();
 
     return Scaffold(
       appBar: AppBar(
@@ -87,14 +97,13 @@ class _AddItemScreenState extends State<AddItemScreen> {
                     //style: Theme.of(context).textTheme.headline6,
                     decoration: InputDecoration(
                         labelText: 'Store',
-                        errorText: storeName == ''
-                            ? 'Please enter a store name.'
-                            : null,
+                        errorText:
+                            store == '' ? 'Please enter a store name.' : null,
                         border: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.0)))),
                     onChanged: (String val) {
-                      setState(() => {storeName = val});
+                      setState(() => {store = val});
                     },
                   ),
                 ),
@@ -140,14 +149,13 @@ class _AddItemScreenState extends State<AddItemScreen> {
                     //style: Theme.of(context).textTheme.headline6,
                     decoration: InputDecoration(
                         labelText: 'Item Name',
-                        errorText: itemName == ''
-                            ? 'Please enter an item name.'
-                            : null,
+                        errorText:
+                            name == '' ? 'Please enter an item name.' : null,
                         border: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.0)))),
                     onChanged: (String val) {
-                      setState(() => {itemName = val});
+                      setState(() => {name = val});
                     },
                   ),
                 ),
@@ -155,7 +163,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                 // TextField with dropdown list
                 ListTile(
                   title: TextField(
-                    controller: TextEditingController()..text = itemType,
+                    controller: TextEditingController()..text = item,
                     decoration: InputDecoration(
                       labelText: 'Item Type',
                       hintText: 'Please input or select a type.',
@@ -166,7 +174,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                         icon: const Icon(Icons.arrow_drop_down),
                         onSelected: (String value) {
                           setState(() {
-                            itemType = value;
+                            item = value;
                           });
                         },
                         itemBuilder: (BuildContext context) => _popUpTypeItems,
@@ -218,8 +226,9 @@ class _AddItemScreenState extends State<AddItemScreen> {
                 primary: Constants.primaryColor,
               ),
               onPressed: () {
-                addDataToFirestore();
-                addNewItem();
+                // addDataToFirestore();
+                // addNewItem();
+                addItem();
               },
               child: Text('Add'),
             ),

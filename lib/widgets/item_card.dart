@@ -49,7 +49,7 @@ class _ItemCardState extends State<ItemCard> {
             cards = snapshot.data.docs.map((doc) => doc.data()).toList();
 
             return Container(
-              height: 150,
+              height: 130,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.only(right: 6),
@@ -85,43 +85,43 @@ class _ItemCardState extends State<ItemCard> {
                         Positioned(
                           // Name of item
                           left: 24,
-                          top: 22,
+                          top: 20,
                           child: Text(
                             '${cards[index]['name']}',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 20),
+                                fontSize: 18),
                           ),
                         ),
                         Positioned(
                           // Quantity left
                           left: 24,
-                          top: 50,
-                          child: Text('Quantity: ${cards[index]['quantity']}',
+                          top: 44,
+                          child: Text(cards[index]['quantity'] != null ? 'Quantity: ${cards[index]['quantity']}' : '',
                               style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w700,
                                   color: Colors.white)),
                         ),
                         Positioned(
                           // Store purchased at
                           left: 24,
-                          top: 88,
+                          top: 74,
                           child: Text('${cards[index]['store']}',
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white)),
                         ),
                         Positioned(
                           // Date of purchase
                           left: 24,
-                          top: 110,
+                          top: 92,
                           child: Text(
                               'Bought on ${DateFormat('yyyy-MM-dd').format(DateTime.parse(cards[index]['purchaseDate'].toDate().toString()))}',
                               style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white)),
                         ),
@@ -151,12 +151,12 @@ class _ItemCardState extends State<ItemCard> {
                                 style: TextStyle(
                                     fontSize: 10, fontWeight: FontWeight.w900),
                                 textAlign: TextAlign.center)),
-                        Positioned(
+                        cards[index]['item'] != null ? Positioned(
                             // Item image
-                            right: 24,
+                            right: 40,
                             bottom: 24,
-                            child: SvgPicture.asset('assets/svg/${cards[index]['item']}.svg', height: 80,)
-                        )
+                            child: SvgPicture.asset('assets/svg/${cards[index]['item']}.svg', height: 70,)
+                        ) : Container()
                       ],
                     ),
                   );

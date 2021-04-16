@@ -1,5 +1,9 @@
+// import 'dart:html';
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
+import 'package:async/async.dart';
 import 'dart:io';
-
+import 'dart:convert';
 import 'package:ecogro/pages/add_item.dart';
 import 'package:ecogro/pages/details_screen.dart';
 // import 'package:firebase_ml_vision/firebase_ml_vision.dart';
@@ -8,7 +12,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:http/http.dart' as http;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +22,61 @@ void main() async {
     home: AddReceipt(),
   ));
 }
+
+const String clientId = 'vrfBezyMF2y9af6cOaYNwjnVw0dRPmX1jmp1OuD';
+const String username = '2373942064';
+const String apiKey = 'b57637ada1ec402aced9f780ff18ceb9';
+const String url = 'https://api.veryfi.com/api/v7/partner/documents/';
+
+const categories = [
+  "Office Expense",
+  "Meals & Entertainment",
+  "Utilities",
+  "Automobile"
+];
+
+var header = {
+  "Accept": "application/json",
+  "CLIENT-ID": clientId,
+  "AUTHORIZATION": "apikey $username:$apiKey"
+};
+
+// Upload receipt
+// upload(File imageFile) async {
+//   // open a bytestream
+//   var stream =
+//       new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+//   // get file length
+//   var length = await imageFile.length();
+
+//   // string to uri
+//   var uri = Uri.parse('https://api.veryfi.com/api/v7/partner/documents/');
+
+//   // create multipart request
+//   var request = new http.MultipartRequest("POST", uri)
+//     ..fields['Accept'] = 'application/json'
+//     ..fields['CLIENT-ID'] = clientId
+//     ..fields['AUTHORIZATION'] = "apikey $username:$apiKey"
+//     ..files.add(await http.MultipartFile.fromPath(
+//       'package', 'build/package.tar.gz',
+//       contentType: MediaType('application', 'x-tar')));
+
+//   // multipart that takes file
+//   var multipartFile = new http.MultipartFile('file', stream, length,
+//       filename: basename(imageFile.path));
+
+//   // add file to multipart
+//   request.files.add(multipartFile);
+
+//   // send
+//   var response = await request.send();
+//   print(response.statusCode);
+
+//   // listen for response
+//   response.stream.transform(utf8.decoder).listen((value) {
+//     print(value);
+//   });
+// }
 
 class AddReceipt extends StatefulWidget {
   @override
@@ -56,33 +114,33 @@ class _AddReceiptState extends State<AddReceipt> {
         shadowColor: Colors.transparent,
       ),
       body: Center(
-        // child: PopupMenuButton<String>(
-        //     shape: RoundedRectangleBorder(
-        //         borderRadius: BorderRadius.all(Radius.circular(10.0))),
-        //     offset: const Offset(-45, -200),
-        //     icon: Icon(
-        //       Icons.add_circle_rounded,
-        //     ),
-        //     iconSize: 60,
-        //     itemBuilder: (BuildContext context) => _popUpMenuItems,
-        //     onSelected: (String newValue) {
-        //       if (newValue == 'Add Manually') {
-        //         Navigator.push(
-        //           context,
-        //           MaterialPageRoute(
-        //             builder: (context) => AddItemScreen(),
-        //             settings: RouteSettings(arguments: newValue),
-        //           ),
-        //         );
-        //       } else {
-        //         _optionsDialogBox();
-        //       }
-        //     }),
-      ),
+          // child: PopupMenuButton<String>(
+          //     shape: RoundedRectangleBorder(
+          //         borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          //     offset: const Offset(-45, -200),
+          //     icon: Icon(
+          //       Icons.add_circle_rounded,
+          //     ),
+          //     iconSize: 60,
+          //     itemBuilder: (BuildContext context) => _popUpMenuItems,
+          //     onSelected: (String newValue) {
+          //       if (newValue == 'Add Manually') {
+          //         Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //             builder: (context) => AddItemScreen(),
+          //             settings: RouteSettings(arguments: newValue),
+          //           ),
+          //         );
+          //       } else {
+          //         _optionsDialogBox();
+          //       }
+          //     }),
+          ),
     );
   }
 
-  Future<void> _optionsDialogBox() {
+  Future<void> _optionsDialogBox(context) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -111,7 +169,10 @@ class _AddReceiptState extends State<AddReceipt> {
                         color: Colors.black,
                         fontWeight: FontWeight.normal),
                   ),
-                  onPressed: () => {getImage('gallery')},
+                  onPressed: () {
+                    print('Testing');
+                    getImage('gallery');
+                  },
                 ),
               ],
             )),
@@ -128,8 +189,19 @@ class _AddReceiptState extends State<AddReceipt> {
       pickedImage = File(tempStore.path);
       isImageLoaded = true;
     });
+
+    await fetchReceiptDetails(pickedImage);
   }
 
+  Future<dynamic> fetchReceiptDetails(File pickedImage) async {
+    final payload = {
+      'file_name': basename(pickedImage.path),
+      'file_url': pickedImage.path,
+      'categories': categories
+    };
+    final response = await http.post(Uri.parse(url), body: payload);
+    print(response);
+  }
   // Future<http.Response> fetchReceiptDetails() {
   //   var url = Uri.parse('https://example.com/whatsit/create');
   //   var response =

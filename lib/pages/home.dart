@@ -87,7 +87,7 @@ class _HomeState extends State<Home> {
                     ),
                     ItemCard(),
                     Container(
-                      height: 40.0,
+                      height: 32.0,
                     ),
                     Row(
                       children: [
