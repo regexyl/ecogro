@@ -27,28 +27,6 @@ class Registration extends StatelessWidget {
         child: Stack(
           children: [
             RegistrationForm(),
-            Center( // to be deleted
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 22.0),
-                          child: TextButton(
-                            child: Text(
-                              'Registration success.',
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w600,
-                                color: Constants.primaryColor
-                              ),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context, 
-                                MaterialPageRoute(
-                                  builder: (context) => RegistrationSuccess())
-                                );
-                            }
-                          ),
-                        ),
-                      )
           ],
         ),
       ),

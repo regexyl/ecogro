@@ -1,8 +1,14 @@
-# ECOGRO
+# EcoGro 🥬🍅🍌
 
-Discover your food wastage habits by scanning your grocery receipts using image processing and machine learning.
+Discover your food wastage habits by scanning your grocery receipts using image processing and tracking your food quantity at home.
 
-## Getting Started
+## App Overview
+
+![Home page](demo/login.png)![Home page](demo/login_filled.png)
+
+## How to run
+
+
 
 This project is a starting point for a Flutter application.
 

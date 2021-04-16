@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:ecogro/widgets/primary_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +79,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Add Item"),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
@@ -221,27 +221,18 @@ class _AddItemScreenState extends State<AddItemScreen> {
                 ),
               ],
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Constants.primaryColor,
-              ),
-              onPressed: () {
-                // addDataToFirestore();
-                // addNewItem();
-                addItem();
-              },
-              child: Text('Add'),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Constants.primaryColor,
-              ),
-              onPressed: () => {
-                //addDataToFirestore();
-                Navigator.pop(context, 'Back')
-              },
-              child: Text('Save'),
-            ),
+            PrimaryButton(
+            text: "Add",
+            onPressed: () {
+              addItem();
+            }),
+            Container(height: 14),
+            PrimaryButton(
+            text: "Save",
+            onPressed: () => {
+              Navigator.pop(context, 'Back')
+            },
+          )
           ],
         ),
       ),
