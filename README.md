@@ -19,7 +19,7 @@ The home page consists of 2 main sections:
 1. In Your Pantry 
 2. Good Deals to Check Out
 ### In Your Pantry
-Users can sort their food inventory by the urgency of consumption. For example, if the food is expiring in 3 days, it will be placed in the 'Urgent' category. A notification (a to-be implemented feature) is also sent out once a food falls into this category. This ensures that the user consumes the food in time.
+Users can sort their food inventory by the urgency of consumption. For example, if the food is expiring in 3 days, it will be placed in the 'Urgent' category. A notification (a to-be implemented feature) is also sent out once a food falls into this category. This ensures that the user consumes the food on time before it is classified as 'WASTED'.
 ### Good Deals to Check Out
 Advertisements from local supermarkets can be displayed here, and this gives a 3-way benefit. First, discount-hunting customers have the ease of viewing discount ads. Secondly, supermarkets can reach out to customers directly for advertising. Thirdly, we as the business/app owner will be able to earn revenue from the ads.
 <p align="center">
