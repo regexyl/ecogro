@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:provider/provider.dart';
 import 'package:ecogro/registration.dart';
 import 'package:ecogro/utils/constants.dart';
 import 'package:ecogro/widgets/login_form.dart';

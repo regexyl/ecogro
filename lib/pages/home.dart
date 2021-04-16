@@ -1,14 +1,11 @@
 import 'package:ecogro/utils/authentication.dart';
-import 'package:firebase_analytics/observer.dart';
-import 'package:flutter/foundation.dart';
+import 'package:ecogro/widgets/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ecogro/utils/authentication.dart';
 import 'package:ecogro/widgets/tab_menu.dart';
 import 'package:ecogro/widgets/item_card.dart';
+import 'package:ecogro/widgets/ad_card.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -66,6 +63,7 @@ class _HomeState extends State<Home> {
                     Container(
                       height: 24.0,
                     ),
+                    // All widgets below are vertically scrollable
                     Row(
                       children: [
                         Text(
@@ -106,13 +104,17 @@ class _HomeState extends State<Home> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        TabMenu(['Wellcome', "PARKnSHOP", 'Marketplace'])
+                        TabMenu(['All', 'Wellcome', "PARKnSHOP", 'Market Place'])
                       ],
                     ),
+                    Container(
+                      height: 14.0,
+                    ),
+                    AdCard(),
                   ])));
         }
 
-        return Text("loading");
+        return LoadScreen();
       },
     );
   }

@@ -50,22 +50,22 @@ class MyApp extends StatelessWidget {
   }
 }
 
-Route<dynamic> _onGenerateRoute(RouteSettings settings) {
-  switch (settings.name) {
-    case "/":
-      return MaterialPageRoute(builder: (BuildContext context) {
-        return Login();
-      });
-    case "/repair-flow":
-      return MaterialPageRoute(builder: (BuildContext context) {
-        return NavBar();
-      });
-    default:
-      return MaterialPageRoute(builder: (BuildContext context) {
-        return Login();
-      });
-  }
-}
+// Route<dynamic> _onGenerateRoute(RouteSettings settings) {
+//   switch (settings.name) {
+//     case "/":
+//       return MaterialPageRoute(builder: (BuildContext context) {
+//         return Login();
+//       });
+//     case "/repair-flow":
+//       return MaterialPageRoute(builder: (BuildContext context) {
+//         return NavBar();
+//       });
+//     default:
+//       return MaterialPageRoute(builder: (BuildContext context) {
+//         return Login();
+//       });
+//   }
+// }
 
 class AuthenticationWrapper extends StatelessWidget {
   @override
