@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ecogro/widgets/search_widget.dart';
 import 'package:ecogro/utils/constants.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ecogro/models/record.dart';
 import 'package:ecogro/mock_data.dart';
 
@@ -21,19 +22,37 @@ class _RecordsListState extends State<RecordsList> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      body: Column(
-        children: <Widget>[
-          buildSearch(),
-          Expanded(
-              child: ListView.builder(
-                itemCount: records.length,
-                itemBuilder: (context, index) {
-                  final record = records[index];
-                  return buildRecord(record);
-                },
-              ),
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 30.0),
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 80.0,
             ),
-        ],
+            Container(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text('Your food items',
+                            style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.w700)),
+                      ],
+                    )),
+            Container(
+              height: 20.0,
+            ),
+            buildSearch(),
+            Expanded(
+                child: ListView.builder(
+                  itemCount: records.length,
+                  itemBuilder: (context, index) {
+                    final record = records[index];
+                    return buildRecord(record);
+                  },
+                ),
+              ),
+          ],
+        ),
       ),
     );
     
@@ -44,18 +63,22 @@ class _RecordsListState extends State<RecordsList> {
         );
 
     Widget buildRecord(Record record) => ListTile(
-        // leading: Image.asset('assets/images/${record.item}.*'), // can it end with *?
-        title: Text(record.item),
+        leading: SizedBox(
+          height: 50,
+          width: 50,
+          child: SvgPicture.asset('assets/svg/${record.item}.svg'),
+        ),
+        title: Text('${record.name}'),
         subtitle: Text(record.store),
       );
 
   void searchRecord(String query) {
     final records = allRecords.where((record) {
-      final itemLower = record.item.toLowerCase();
+      final nameLower = record.name.toLowerCase();
       final storeLower = record.store.toLowerCase();
       final searchLower = query.toLowerCase();
 
-      return itemLower.contains(searchLower) ||
+      return nameLower.contains(searchLower) ||
           storeLower.contains(searchLower);
     }).toList();
 

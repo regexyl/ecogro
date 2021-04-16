@@ -6,19 +6,19 @@ import 'package:ecogro/utils/constants.dart';
 
 class AdCard extends StatelessWidget {
   static const List<String> ad_images = [
-    'wellcome_ad2.jpeg',
-    'wellcome_ad3.jpeg',
-    'wellcome_ad4.jpeg',
-    'wellcome_ad5.jpeg',
-    'parknshop_ad1.png',
-    'parknshop_ad2.png',
-    'parknshop_ad3.png',
-    'parknshop_ad4.png',
-    'marketplace_ad1.jpeg',
-    'marketplace_ad2.jpeg',
-    'marketplace_ad3.jpeg',
-    'marketplace_ad4.jpeg',
-    'marketplace_ad5.jpeg',
+    'wellcome_ad2',
+    'wellcome_ad3',
+    'wellcome_ad4',
+    'wellcome_ad5',
+    'parknshop_ad1',
+    'parknshop_ad2',
+    'parknshop_ad3',
+    'parknshop_ad4',
+    'marketplace_ad1',
+    'marketplace_ad2',
+    'marketplace_ad3',
+    'marketplace_ad4',
+    'marketplace_ad5',
   ];
 
   @override
@@ -40,7 +40,7 @@ class AdCard extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(28),
-                    child: Image.asset('assets/images/${ad_images[index]}'),
+                    child: Image.asset('assets/images/${ad_images[index]}.jpeg'),
                   ),
                 ],
               ));

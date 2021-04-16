@@ -1,13 +1,14 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ecogro/utils/constants.dart';
 import 'package:ecogro/pages/add_receipt.dart';
 import 'package:ecogro/pages/home.dart';
 import 'package:ecogro/pages/profile.dart';
 import 'package:ecogro/pages/records.dart';
 import 'package:ecogro/pages/rewards.dart';
+import 'package:ecogro/pages/add_item.dart';
 
 class NavBar extends StatefulWidget {
   @override
@@ -19,7 +20,7 @@ class _NavBarState extends State<NavBar> {
     int currentTab = 0;
     final List<Widget> screens = [
       Home(),
-      Records(),
+      RecordsList(),
       AddReceipt(),
       Rewards(),
       Profile(),
@@ -27,6 +28,24 @@ class _NavBarState extends State<NavBar> {
 
     final PageStorageBucket bucket = PageStorageBucket();
     Widget currentScreen = Home();
+
+    File pickedImage;
+    var imageFile;
+
+    var result = '';
+
+    bool isImageLoaded = false;
+
+  static const List<String> menuItems = [
+    'Scan Reciept',
+    'Scan Item',
+    'Add Manually'
+  ];
+
+  final List<PopupMenuItem<String>> _popUpMenuItems = menuItems
+      .map((String value) =>
+          PopupMenuItem<String>(value: value, child: Text(value)))
+      .toList();
 
     @override
     Widget build(BuildContext context) {
@@ -39,14 +58,36 @@ class _NavBarState extends State<NavBar> {
           width: 70,
           height: 70,
           child: (
-            FloatingActionButton(
-              child: Icon(Icons.add, size: 30.0,),
-              backgroundColor: Constants.primaryColor,
-              onPressed: () {},
-            )
-          )
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            // FloatingActionButton(
+            //   child: Icon(Icons.add, size: 30.0,),
+            //   backgroundColor: Constants.primaryColor,
+            //   onPressed: () {},
+            // )
+            PopupMenuButton<String>(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            offset: const Offset(-45, -200),
+            icon: Icon(
+              Icons.add_circle_rounded,
+            ),
+            iconSize: 60,
+            itemBuilder: (BuildContext context) => _popUpMenuItems,
+            onSelected: (String newValue) {
+              if (newValue == 'Add Manually') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddItemScreen(),
+                    settings: RouteSettings(arguments: newValue),
+                  ),
+                );
+              } else {
+                _optionsDialogBox();
+              }
+            })),
+          ),
+        
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomAppBar(
           shape: CircularNotchedRectangle(),
           notchMargin: 10,
@@ -82,7 +123,7 @@ class _NavBarState extends State<NavBar> {
                       minWidth: 76,
                       onPressed: () {
                         setState(() {
-                          currentScreen = Records();
+                          currentScreen = RecordsList();
                           currentTab = 1;
                         });
                       },
@@ -146,4 +187,51 @@ class _NavBarState extends State<NavBar> {
         ),
       );
     }
+
+    Future<void> _optionsDialogBox() {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            insetPadding: EdgeInsets.symmetric(horizontal: 100),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            content: new SingleChildScrollView(
+                child: new ListBody(
+              children: <Widget>[
+                TextButton(
+                  child: const Text(
+                    'With camera',
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal),
+                  ),
+                  onPressed: () => {getImage('camera')},
+                ),
+                TextButton(
+                  child: const Text(
+                    'From gallery',
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal),
+                  ),
+                  onPressed: () => {getImage('gallery')},
+                ),
+              ],
+            )),
+          );
+        });
+  }
+  getImage(String imageSource) async {
+    var tempStore = await ImagePicker().getImage(
+        source:
+            imageSource == 'camera' ? ImageSource.camera : ImageSource.gallery);
+
+    setState(() {
+      pickedImage = File(tempStore.path);
+      isImageLoaded = true;
+    });
+  }
   }
