@@ -3,8 +3,8 @@
 Discover your food wastage habits by scanning your grocery receipts using image processing and tracking your food quantity at home.
 
 ## App Overview
-
-![Home page](demo/login.png)![Home page](demo/login_filled.png)
+<img src="demo/login.png" alt="home page" width="100">
+<!-- ![Home page](demo/login.png | width=100)![Home page](demo/login_filled.png) -->
 
 ## How to run
 
